@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="resource/css/layui.css" media="all" />
+<script type="text/javascript" src="resource/layui.js"></script>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<style type="text/css">
+.layui-form-item{
+	width:400px;
+}
+</style>
+</head>
+<body>
+<div style="height:20px;"></div>
+<form class="layui-form" action="" method="post">
+  <div class="layui-form-item">
+    <label class="layui-form-label">用户名</label>
+    <div class="layui-input-block">
+      <input type="text" name="username" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+ 
+  <div class="layui-form-item">
+    <label class="layui-form-label">余额</label>
+    <div class="layui-input-block">
+      <input type="text" name="money" required  lay-verify="required" placeholder="请输入余额" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  
+   <div class="layui-form-item">
+    <label class="layui-form-label">密码</label>
+    <div class="layui-input-block">
+      <input type="text" name="password" required  lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+  </div>
+</form>
+ 
+<script>
+//Demo
+layui.use('form', function(){
+  var form = layui.form;
+  
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+
+	  $.ajax({
+		  url:"addUser",
+		  dataType:"json",
+		  type:"POST",
+		  data:data.filed,
+		  success:function(data){
+			  
+			  if(data==0){
+				  //成功渲染数据并关闭窗口
+				  reloadData();
+				  parentCloseWindow();
+				 return;
+			  }
+			  
+			  layer.msg("添加失败！");
+		  }
+		  
+	  })
+    
+	  return false;
+  });
+  
+  function reloadData(){
+	
+	  
+	  parent.currentTable.reload({
+		  });
+	  
+  }
+  
+  function parentCloseWindow(){
+	  
+	  /*parent 获取父页面对象 进行关闭所有弹窗*/
+	  parent.layui.layer.closeAll('iframe');
+	  parent.layer.msg("添加成功！");
+  }
+  
+  
+});
+</script>
+      
+</body>
+</html>

@@ -6,7 +6,11 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 
-
+/**
+ * 后端微服务项目 从配置中心读取jdbc四要素 ，并注册到注册中心
+ * @author SDJX
+ *
+ */
 @SpringBootApplication
 @EnableDiscoveryClient
 public class SpringbootMain {

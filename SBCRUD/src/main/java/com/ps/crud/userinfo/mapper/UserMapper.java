@@ -31,7 +31,7 @@ public interface UserMapper {
 	@Delete("delete from user where id=#{dID}")
 	public int deleteUserById(@Param(value = "dID") String dID);
 
-	@Delete("delete from user where id in($dID})")
+	@Delete("delete from user where id in(${dID})")
 	public int deleteUsersByIds(@Param(value = "dID") String dID);
 
 	@Update("update user set username=#{u.username},password=#{u.password},money=#{u.money} where id=#{u.id}")

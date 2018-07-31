@@ -21,7 +21,6 @@ public class UserController {
 	
 	@GetMapping("/queryUser")
 	public ResponseEntity queryUser(Integer page,Integer limit,String username){
-		System.out.println(page+"---"+limit+"=="+username);
 		return userServuce.queryAllUser(page, limit, username);
 	}
 	
@@ -49,11 +48,13 @@ public class UserController {
 	
 	@DeleteMapping("/delusers/{deleteIds}")
 	public ResponseEntity deleteUsers(@PathVariable String deleteIds) {
+	
 		ResponseEntity r = new ResponseEntity();
 		try {
 			userServuce.deleteUsersByIds(deleteIds);
 			r.setCode(1);
 		} catch (Exception e) {
+			e.printStackTrace();
 			r.setMas(e.getMessage());
 		}
 		return r;
